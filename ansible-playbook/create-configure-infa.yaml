@@ -41,3 +41,12 @@
       copy:
          src: ~/.ssh/keypair.pem
          dest: ~/.ssh/keypair.pem
+
+    - name: Clone a private Git repository
+      become: no
+      become_user: ec2_user
+      git:
+        repo: https://github.com/guytamari/ci-cd-workshop.git
+        dest: /home/ec2-user/github-repo
+        accept_hostkey: yes
+        key_file: /home/ec2-user/.ssh/id_rsa.pub
