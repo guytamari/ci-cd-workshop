@@ -11,15 +11,12 @@ pipeline {
         }
         stage('build and deploy') {
             steps {
-                ansiblePlaybook(
-                    playbook: 'ansible-playbook/create-configure-infa.yaml',
-                    inventory: 'ansible-playbook/inventory.yaml',
-                    credentialsId: 'ec2-private-key',
-                    hostKeyChecking: 'false',
-                    extraVars: [
-                        ansible_host: "172.31.44.146"
-                    ]
-                    )
+                withEnv(["ANSIBLE_HOST_KEY_CHECKING=False"]) { // Disable SSH host key checking
+                    ansiblePlaybook(
+                        playbook: 'ansible-playbook/create-configure-infa.yaml',
+                        inventory: 'ansible-playbook/inventory.yaml',
+                        credentialsId: 'ec2-private-key',
+                        hostKeyChecking: 'false'
             }
         }
     }
