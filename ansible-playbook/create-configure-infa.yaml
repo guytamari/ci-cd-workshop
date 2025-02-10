@@ -71,6 +71,7 @@
         source: build
       with_items:
         - "latest"
+        - "{{ git_status.after }}"
     - name: run container
       shell: |
         docker run -d -p 8080:5000 guytamari/js-app:lateset
