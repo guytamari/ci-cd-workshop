@@ -10,7 +10,7 @@ pipeline {
                 ansiblePlaybook(
                     playbook: 'ansible-playbook/create-configure-infa.yaml',
                     inventory: 'ansible-playbook/inventory.yaml',
-                    credentialsId: "${SSH_FILE}"
+                    credentialsId: "~/.ssh/keypair.pem"
                     )
             }
         }
