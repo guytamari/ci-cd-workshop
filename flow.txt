@@ -1,0 +1,48 @@
+
+2 main missions:
+    - create 2 playbook that create and destroy the cloud infra
+    - managed the application on the github repo to deploy on the production server
+
+
+2 playbooks:
+create and destroy infra
+
+create:
+    - create cloud infra (setup installtion on production server) - 
+        configure ansible to connect propely to the production server
+            tasks for the playbook:
+                ● install epel-release package
+                ● install git, python-pip, yum-utils
+                ● add docker-ce repo. ( shell: "yum-config-manager --add-re
+                https://download.docker.com/linux/centos/docker-ce.repo" )
+                ● Install docker-ce, docker-ce-cli, containerd.io, docker-compose
+                ( use ansible.builtin.yum module )
+                ● Start Docker ( use ansible.builtin.service module)
+                ● Copy ssh key
+                ● Clone app repo src folder
+                ● Build docker image and push to DockerHub
+                ● Start docker app
+
+
+- create dockerfile for the app 
+        make sure to expose right ports
+        and download reqirements
+- create docker compose
+
+
+
+
+
+
+-  configure jenkins pipline
+
+ci:
+    get the repo, tests the application, pushes image to registry
+cd:
+    if the application ran right.  deploy the application to stagin enviroment on production
+
+
+(checkout repo, test, deploy to an ecr)
+jenkins file:
+    -  checkout github repo (add creds for github)
+    -  
