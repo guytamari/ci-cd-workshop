@@ -1,0 +1,43 @@
+---
+- name: main playbook
+  hosts: all
+  become: True
+  gather_facts: True
+  tasks:
+    - name: Update all packages
+      yum:
+          name: '*'
+          state: latest
+          update_only: yes
+    - name: install packages
+      yum:
+         name:
+           - git
+           - python-pip
+           - yum-utils
+         state: present
+
+
+    - name: add docker-ce-repo
+      shell: |
+        yum-config-manager --add-repo https://download.docker.com/linux/ubuntu/gpg
+      
+
+    - name: install docker stuff
+      package:
+         name: 
+           - docker
+         state: present
+
+    
+    - name: start and enable
+      service:
+         name: docker
+         state: started
+         enabled: yes
+    - name: copy ssh key
+      become: no
+      become_user: ec2-user
+      copy:
+         src: ~/.ssh/keypair.pem
+         dest: ~/.ssh/keypair.pem
