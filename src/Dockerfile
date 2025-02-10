@@ -1,8 +1,10 @@
+FROM python:3.8-slim-buster
 
-FROM node:10-alpine
 WORKDIR /python-docker
-COPY package*.json ./
-RUN npm install
-COPY . .
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 EXPOSE 5000
-CMD ["npm","start","app.js"]
+COPY . .
+
+CMD [ "python3", "app.py"]
