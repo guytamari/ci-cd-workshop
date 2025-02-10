@@ -1,6 +1,6 @@
 ---
 - name: main playbook
-  hosts: all
+  hosts: production-server-home
   become: True
   gather_facts: True
   tasks:
