@@ -10,7 +10,8 @@ pipeline {
                 ansiblePlaybook(
                     playbook: 'ansible-playbook/create-configure-infa.yaml',
                     inventory: 'ansible-playbook/inventory.yaml',
-                    credentialsId: "~/.ssh/keypair.pem"
+                    credentialsId: "ec2-user",
+                    hostKeyChecking: 'False'
                     )
             }
         }
