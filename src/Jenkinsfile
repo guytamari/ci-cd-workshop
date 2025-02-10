@@ -17,6 +17,7 @@ pipeline {
                         inventory: 'ansible-playbook/inventory.yaml',
                         credentialsId: 'ec2-private-key',
                         hostKeyChecking: 'false'
+                    )
             }
         }
     }
