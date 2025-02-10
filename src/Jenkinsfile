@@ -2,19 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('build and deploy') {
             steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                ansiblePlaybook inventory: 'inventory.yaml'
+                ansiblePlaybook playbook: 'create-configure-infa.yaml'
             }
         }
     }
