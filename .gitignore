@@ -1,0 +1,4 @@
+vars.yaml
+ansible-playbook/vars.yaml
+all.yaml
+ansible-playbook/group_vars/all.yaml

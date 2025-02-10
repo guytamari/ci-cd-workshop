@@ -54,21 +54,23 @@
 
 
     - name: login to dockerhub
-      when: git_status.changed == true
+      #when: git_status.changed == true
       docker_login:
         config_path: /home/ec2-user/.docker/config.json
         username: "{{ docker_user }}"
         password: "{{ docker_password }}"
 
     - name: Build and push to dockerhub
-      when: git_status.changed == true
+      #when: git_status.changed == true
       docker_image:
         build:
           path: "/home/ec2-user/github-repo/src"
-        name: guytamari/flask-app
+        name: guytamari/js-app
         tag: "{{ item }}"
         push: yes
         source: build
       with_items:
         - "latest"
-        - "{{ git_status.after }}"
+    - name: run container
+      shell: |
+        docker run -d -p 8080:5000 guytamari/js-app:lateset
