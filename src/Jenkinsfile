@@ -14,7 +14,7 @@ pipeline {
                 ansiblePlaybook(
                     playbook: 'ansible-playbook/create-configure-infa.yaml',
                     inventory: 'ansible-playbook/inventory.yaml',
-                    credentialsId: 'ec2-user',
+                    credentialsId: 'ec2-user-text',
                     hostKeyChecking: 'false'
                     )
             }
