@@ -16,7 +16,10 @@ pipeline {
                         playbook: 'ansible-playbook/create-configure-infa.yaml',
                         inventory: 'ansible-playbook/inventory.yaml',
                         credentialsId: 'ec2-private-key',
-                        hostKeyChecking: 'false'
+                        hostKeyChecking: 'false',
+                        extraVars: [
+                            ansible_ssh_private_key_file: "/home/ubuntu/.ssh/id_ed25519"
+                        ]
                     )
                 }
             }
