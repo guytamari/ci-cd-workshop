@@ -44,9 +44,31 @@
 
     - name: Clone a private Git repository
       become: no
-      become_user: ec2_user
+      become_user: ec2-user
       git:
         repo: https://github.com/guytamari/ci-cd-workshop.git
         dest: /home/ec2-user/github-repo
         accept_hostkey: yes
         key_file: /home/ec2-user/.ssh/id_rsa.pub
+      register: git_status
+
+
+    - name: login to dockerhub
+      when: git_status.changed == true
+      docker_login:
+        config_path: /home/ec2-user/.docker/config.json
+        username: "{{ docker_user }}"
+        password: "{{ docker_password }}"
+
+    - name: Build and push to dockerhub
+      when: git_status.changed == true
+      docker_image:
+        build:
+          path: "/home/ec2-user/github-repo/src"
+        name: guytamari/flask-app
+        tag: "{{ item }}"
+        push: yes
+        source: build
+      with_items:
+        - "latest"
+        - "{{ git_status.after }}"
