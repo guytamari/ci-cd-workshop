@@ -5,7 +5,7 @@ pipeline {
         stage('build and deploy') {
             steps {
                 ansiblePlaybook(
-                    playbook: 'create-configure-infa.yaml'
+                    playbook: 'create-configure-infa.yaml',
                     inventory: 'inventory.yaml' 
                     )
             }
