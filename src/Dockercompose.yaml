@@ -1,0 +1,7 @@
+version: '3'
+services:
+  flask-hello:
+    build:
+      context: Dockerfile
+      dockerfile: Dockerfile
+    image: guytamari/js-app
