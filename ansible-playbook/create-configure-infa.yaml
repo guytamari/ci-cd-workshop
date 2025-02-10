@@ -74,4 +74,9 @@
         - "{{ git_status.after }}"
     - name: run container
       shell: |
-        docker run -d -p 8080:5000 guytamari/js-app:"{{ git_status.after }}"
+        docker run -d  guytamari/js-app:"{{git_status.after}}"
+    
+    
+    - name: Run `docker compose up` again
+      community.docker.docker_compose_v2:
+        project_src: /home/ec2-user/github-repo/src
