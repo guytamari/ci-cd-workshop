@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        SSH_FILE  = credentials('ec2-user')
-    }
     stages {
         stage('debug') {
             steps { 
