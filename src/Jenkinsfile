@@ -15,7 +15,7 @@ pipeline {
                     playbook: 'ansible-playbook/create-configure-infa.yaml',
                     inventory: 'ansible-playbook/inventory.yaml',
                     credentialsId: 'ec2-private-key',
-                    hostKeyChecking: 'false'
+                    hostKeyChecking: 'false',
                     extraVars: [
                         ansible_host: "172.31.44.146"
                     ]
